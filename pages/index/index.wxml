@@ -1,0 +1,14 @@
+<!--index.wxml-->
+<view class="container">
+  <view  bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text wx:if="{{userInfo.nickName!='授权登录'}}" class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{user.obj.name}}</text>
+    <button wx:if="{{canIUse&&userInfo.nickName=='授权登录'}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">{{userInfo.nickName}}</button>
+  </view>
+  <view>
+  <button bindtap="bindAuthLogin">登录</button>
+  </view>
+</view>
