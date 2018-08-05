@@ -1,3 +1,4 @@
+var util = require("../../utils/util.js")
 //index.js
 //获取应用实例
 var app = getApp()
@@ -41,31 +42,24 @@ Page({
   },
   getUserChannel: function(){
     var that = this
-    wx.request({
-      url: 'https://spapi.hzfanews.com/api/UserChannel',
-      header: { "sessionid": sessionid },
-      method: "GET",
-      success(res) {
-        console.log(res.data);
-        if (res.data.state == 0 && res.data.obj.length > 0) {
-          that.setData({
-            selData:res.data.obj
-          })
-          that.getArticle(res.data.obj[0].id);
-        }
-        else if(res.data.state==1)
-        {
-          wx.showToast({
-            title: '请先登录',
-            icon:"loading",
-            duration:1500,
-            success:function(){
-              wx.switchTab({
-                url: '../index/index'
-              })
-            }
-          })
-        }
+    util.UserChannel(null, { "sessionid": sessionid },function(res){
+      if (res.data.state == 0 && res.data.obj.length > 0) {
+        that.setData({
+          selData: res.data.obj
+        })
+        that.getArticle(res.data.obj[0].id);
+      }
+      else if (res.data.state == 1) {
+        wx.showToast({
+          title: '请先登录',
+          icon: "loading",
+          duration: 1500,
+          success: function () {
+            wx.switchTab({
+              url: '../index/index'
+            })
+          }
+        })
       }
     })
   },
@@ -76,27 +70,20 @@ Page({
     })
     if(start==undefined) 
       start=0
-    wx.request({
-      url: 'https://spapi.hzfanews.com/api/Article?id=' + id+'&start='+start,
-      header: { "sessionid": sessionid },
-      method: "GET",
-      success(res) {
-        console.log(res.data);
-        if (res.data.state==0){
-          var list= res.data.obj.list
-          if(start>0){
-            list=that.data.List.concat(list)
-          }
-          that.setData({
-            List:list,
-            loading: true
-          })
+    util.Article({"id":id , "start":start},{ "sessionid": sessionid },function(res){
+      if (res.data.state == 0) {
+        var list = res.data.obj.list
+        if (start > 0) {
+          list = that.data.List.concat(list)
         }
+        that.setData({
+          List: list,
+          loading: true
+        })
       }
     })
   },
   listClick:function(e){
-    console.log(e)
     this.getArticle(e.currentTarget.dataset.idx)
     this.setData({
       curpage:e.target.id
