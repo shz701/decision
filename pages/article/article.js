@@ -4,6 +4,8 @@ var app = getApp()
 var sessionid;
 Page({
   data: {
+    scrollTop:0,
+    list_height:700,
     loading: false,
     curpage: 0,
     selData:[],
@@ -18,12 +20,24 @@ Page({
     console.log('onLoad')
     var that = this
   	//调用应用实例的方法获取全局数据
-   
+    wx.getSystemInfo({
+      success: function(res) {
+        that.setData({
+          list_height: res.windowHeight - 78*res.screenWidth/750
+        })
+        
+      },
+    })
   },
   onShow:function(){
     var user =wx.getStorageSync("user")
     sessionid = user.sessionid
     this.getUserChannel();
+  },
+  scrollup:function(e) {
+    var self = this;
+    var id = self.data.selData[self.data.curpage].id
+    self.getArticle(id, self.data.List.length);
   },
   getUserChannel: function(){
     var that = this
@@ -55,21 +69,26 @@ Page({
       }
     })
   },
-  getArticle:function (id){
+  getArticle:function (id,start){
     var that = this
     that.setData({
       loading: false
     })
-    
+    if(start==undefined) 
+      start=0
     wx.request({
-      url: 'https://spapi.hzfanews.com/api/Article?id=' + id,
+      url: 'https://spapi.hzfanews.com/api/Article?id=' + id+'&start='+start,
       header: { "sessionid": sessionid },
       method: "GET",
       success(res) {
         console.log(res.data);
         if (res.data.state==0){
+          var list= res.data.obj.list
+          if(start>0){
+            list=that.data.List.concat(list)
+          }
           that.setData({
-            List:res.data.obj.list,
+            List:list,
             loading: true
           })
         }
@@ -81,6 +100,9 @@ Page({
     this.getArticle(e.currentTarget.dataset.idx)
     this.setData({
       curpage:e.target.id
+    })
+    this.setData({
+      scrollTop:0
     })
   }
 })

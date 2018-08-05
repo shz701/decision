@@ -8,13 +8,13 @@
 .topTabBar {
     background-color: #d75b5d;
     width: 100%;
-    height: 88rpx;
+    height: 78rpx;
     display: flex;
     flex-direction: row;
 }
 .leftView {
     height: 100%;
-    width: 90%;
+    width: 100%;
     position: relative;
 }
 .rightview {
@@ -45,13 +45,14 @@
 
 .topdatalist {
   display:inline-block;
-  margin-top: 12rpx;
   color: white;
-  margin-left: 10rpx;
-  width: 200rpx;
+  width: 33%;
   height: 100%;
   text-align: center;
   z-index: 99;
+  line-height: 78rpx;
+  font-weight:bold;
+  vertical-align:middle;
 }
 
 .curPage {
@@ -62,7 +63,7 @@
 @keyframes myfirst
 {
 	to {
-       font-size: 40rpx;
+       font-size: 34rpx;
     }
 }
 
@@ -124,4 +125,36 @@
 .imageshow {
     width: 230rpx;
     height: 150rpx;
+}
+.articlelist{
+  padding:20rpx;
+}
+.row{
+  width:100%;
+  min-height: 78rpx;
+  border-bottom: 1px solid #ccc;
+  height: 200rpx;
+}
+.row :last-child{
+  border-bottom: none;
+}
+.articleleft{
+  width:40%;
+  float:left;
+  position: relative;
+  height: 200rpx;
+  padding-top:1rpx;
+}
+.articleright{
+  width:55%;
+  float:right;
+  position: relative;
+  height:200rpx;
+}
+.scroll{
+overflow:hidden;
+
+}
+page{
+  overflow: hidden;
 }

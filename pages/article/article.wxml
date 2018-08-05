@@ -1,41 +1,41 @@
 <!--pages/article/article.wxml-->
 <!--用name 定义模版-->
 <template name="msgTemp">
-<!--
+  <!--
 1. scaleToFill : 图片全部填充显示，可能导致变形
 2. aspectFit ： 图片全部显示，以最长边为准
 3. aspectFill ： 图片全部显示，以最短边为准
 4. widthFix ： 宽不变，全部显示图片
 -->
-<view>
+  <view class="articleleft" wx:if="{{thumb!=''}}">
+    <image class='imageContainer' src="{{thumb}}" mode="scaleToFill"></image>
+  </view>
+  <view class='artcleright'>
     <text class='text'>{{title}}</text>
     <text class='text'>{{paperdate}}</text>
-</view>
-<view wx:if="{{thumb!=''}}">
-    <image class='imageContainer' src="{{thumb}}" mode="scaleToFill"></image>
-</view>
+  </view>
 </template>
 <view class="mainView">
-<view class="topTabBar">
   <loading hidden="{{loading}}">
-        加载中...
+    加载中...
   </loading>
+  <view class="topTabBar">
     <view class="leftView">
-    <scroll-view scroll-x="true" scroll-y="false" class="tpscview" scroll-left="-2">
-      <block wx:for="{{selData}}">
-        <view animation="{{animation}}" class="topdatalist {{index==curpage?'curPage':''}}" bindtap="listClick" id="{{index}}" data-idx="{{item.id}}">
-              {{item.channelName}}
+      <scroll-view scroll-x="true" scroll-y="false" class="tpscview" scroll-left="0">
+        <block wx:for="{{selData}}">
+          <view animation="{{animation}}" class="topdatalist {{index==curpage?'curPage':''}}" bindtap="listClick" id="{{index}}" data-idx="{{item.id}}">
+            {{item.channelName}}
           </view>
-      </block>
-       </scroll-view>
-      </view>
-      <scroll-view bindscrolltolower="addData" scroll-y="true">
-
+        </block>
       </scroll-view>
+    </view>
   </view>
-
-<view wx:for="{{List}}">
-    <!--用is 使用模版-->
-    <template is="msgTemp" data="{{...item}}"/>
-</view>
+  <scroll-view enable-back-to-top="true" scroll-x="false" scroll-y="true" class="scroll" scroll-left="0" style='height:{{list_height}}px' bindscrolltolower="scrollup" scroll-top="{{scrollTop}}">
+    <view class="articlelist">
+      <view class='row' wx:for="{{List}}">
+        <!--用is 使用模版-->
+        <template is="msgTemp" data="{{...item}}" />
+      </view>
+    </view>
+    </scroll-view>
 </view>
