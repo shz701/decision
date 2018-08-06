@@ -50,16 +50,16 @@ Page({
         that.getArticle(res.data.obj[0].id);
       }
       else if (res.data.state == 1) {
-        wx.showToast({
-          title: '请先登录',
-          icon: "loading",
-          duration: 1500,
-          success: function () {
-            wx.switchTab({
-              url: '../index/index'
-            })
-          }
-        })
+        // wx.showToast({
+        //   title: '请先登录',
+        //   icon: "loading",
+        //   duration: 1500,
+        //   success: function () {
+        //     wx.switchTab({
+        //       url: '../index/index'
+        //     })
+        //   }
+        // })
       }
     })
   },

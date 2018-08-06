@@ -49,8 +49,12 @@ function requestApi(action, method, PostData, header, callback) {
     method: method,
     success: function(res) {
       if(res.data.state==1){
-        login(function(res){
-          requestApi(action, method, PostData, header, callback)
+        // login(function(res){
+        //   requestApi(action, method, PostData, header, callback)
+        // })
+        wx.showToast({
+          title: '请登录',
+          duration:2000
         })
       }
       typeof callback == "function" && callback(res)
