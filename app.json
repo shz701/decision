@@ -11,24 +11,25 @@
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
+    "selectedColor":"#ff0000",
     "list": [
       {
         "pagePath": "pages/article/article",
         "text": "文  章",
-        "iconPath": "images/stop.png",
-        "selectedIconPath": "images/stop.png"
+        "iconPath": "images/首页.png",
+        "selectedIconPath": "images/首页2.png"
       },
       {
       "pagePath": "pages/index/index",
       "text": "登  录",
-      "iconPath": "images/arrowright.png",
-      "selectedIconPath": "images/arrowright.png"
+      "iconPath": "images/登录.png",
+      "selectedIconPath": "images/登录2.png"
     },
     {
       "pagePath": "pages/logs/logs",
       "text": "日  志",
-      "iconPath": "images/pause.png",
-      "selectedIconPath": "images/pause.png"
+      "iconPath": "images/日志.png",
+      "selectedIconPath": "images/日志2.png"
     }]
   }
 }
