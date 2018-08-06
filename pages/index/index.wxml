@@ -10,5 +10,6 @@
   </view>
   <view>
   <button bindtap="bindAuthLogin">登录</button>
+  <button bindtap="bindLogin">获取code</button>
   </view>
 </view>

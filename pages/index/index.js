@@ -87,21 +87,7 @@ Page({
     wx.login({
       
       success:function(res){
-        console.log(res.code)
-        wx.request({
-          //获取openid接口
-          url: 'https://api.weixin.qq.com/sns/jscode2session',
-          data: {
-            appid: "wx3515c0dadd287f69",
-            secret: "",
-            js_code: res.code,
-            grant_type: 'authorization_code'
-          },
-          method: 'GET',
-          success: function (res) {
-            console.log(res.data);
-          }
-        });
+        console.log(res.code) 
       }
     })
   }
