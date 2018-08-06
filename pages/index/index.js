@@ -58,5 +58,12 @@ Page({
         console.log('登录失败！' + JSON.stringify(res.data.msg))
       }
     })
+  },
+  bindLogin:function(){
+    wx.login({
+      success:function(res){
+        console.log(res.code)
+      }
+    })
   }
 })

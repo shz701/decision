@@ -135,7 +135,7 @@
   border-bottom: 1px solid #ccc;
   height: 200rpx;
 }
-.row :last-child{
+.row:last-child{
   border-bottom: none;
 }
 .articleleft{
