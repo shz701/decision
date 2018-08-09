@@ -34,7 +34,7 @@ Page({
   },
   scrollup:function(e) {
     var self = this;
-    var id = self.data.selData[self.data.curpage].id
+    var id = self.data.curpage
     self.getArticle(id, self.data.List.length);
   },
   getUserChannel: function(){
@@ -44,7 +44,7 @@ Page({
         that.setData({
           selData: res.data.obj
         })
-        that.getArticle(res.data.obj[0].id);
+        that.getArticle(0);
       }
     })
   },
@@ -69,7 +69,7 @@ Page({
     })
   },
   listClick:function(e){
-    this.getArticle(e.currentTarget.dataset.idx)
+    this.getArticle(e.currentTarget.id)
     this.setData({
       curpage:e.target.id
     })
