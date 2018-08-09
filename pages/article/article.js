@@ -76,5 +76,10 @@ Page({
     this.setData({
       scrollTop:0
     })
+  },
+  navigate:function(e){
+    wx.navigateTo({
+      url: '../articleinfo/articleinfo?id='+e.currentTarget.dataset.idx,
+    })
   }
 })

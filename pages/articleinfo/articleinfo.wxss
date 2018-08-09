@@ -1,0 +1,10 @@
+/* pages/articleinfo/articleinfo.wxss */
+@import "../../wxParse/wxParse.wxss";
+.container{
+  padding:0 10rpx;
+}
+.date{
+  position: relative;
+  float:left;
+}
+

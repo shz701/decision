@@ -42,6 +42,10 @@ function UserChannel(paraData, callback) {
   requestApi('UserChannel', 'GET', paraData, callback)
 }
 
+function articleinfo(id, callback) {
+  requestApi('Article/'+id, 'GET', null, callback)
+}
+
 function Article(paraData, callback) {
   requestApi('Article', 'GET', paraData, callback)
 }
@@ -77,5 +81,6 @@ module.exports = {
   formatTime: formatTime,
   login: login,
   UserChannel: UserChannel,
-  Article: Article
+  Article: Article,
+  articleinfo:articleinfo
 }

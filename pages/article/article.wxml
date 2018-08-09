@@ -32,10 +32,12 @@
   </view>
   <scroll-view enable-back-to-top="true" scroll-x="false" scroll-y="true" class="scroll" scroll-left="0" style='height:{{list_height}}px' bindscrolltolower="scrollup" scroll-top="{{scrollTop}}">
     <view class="articlelist">
-      <view class='row' wx:for="{{List}}">
+    <block wx:for="{{List}}">
+      <view class='row' bindtap='navigate' data-idx="{{item.articlesequenceid}}">
         <!--用is 使用模版-->
         <template is="msgTemp" data="{{...item}}" />
       </view>
+      </block>
     </view>
     </scroll-view>
 </view>
