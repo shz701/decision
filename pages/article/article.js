@@ -2,7 +2,6 @@ var util = require("../../utils/util.js")
 //index.js
 //获取应用实例
 var app = getApp()
-var sessionid;
 Page({
   data: {
     scrollTop:0,
@@ -31,8 +30,6 @@ Page({
     })
   },
   onShow:function(){
-    var user =wx.getStorageSync("user")
-    sessionid = user.sessionid
     this.getUserChannel();
   },
   scrollup:function(e) {
@@ -42,24 +39,12 @@ Page({
   },
   getUserChannel: function(){
     var that = this
-    util.UserChannel(null, { "sessionid": sessionid },function(res){
+    util.UserChannel(null,function(res){
       if (res.data.state == 0 && res.data.obj.length > 0) {
         that.setData({
           selData: res.data.obj
         })
         that.getArticle(res.data.obj[0].id);
-      }
-      else if (res.data.state == 1) {
-        // wx.showToast({
-        //   title: '请先登录',
-        //   icon: "loading",
-        //   duration: 1500,
-        //   success: function () {
-        //     wx.switchTab({
-        //       url: '../index/index'
-        //     })
-        //   }
-        // })
       }
     })
   },
@@ -70,7 +55,7 @@ Page({
     })
     if(start==undefined) 
       start=0
-    util.Article({"id":id , "start":start},{ "sessionid": sessionid },function(res){
+    util.Article({"id":id , "start":start},function(res){
       if (res.data.state == 0) {
         var list = res.data.obj.list
         if (start > 0) {

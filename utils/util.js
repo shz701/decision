@@ -20,12 +20,17 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
-function login(callback) {
+function login(obj) {
   var self = this 
   wx.login({
     success:function(res){
       if (res.code) {
-        requestApi('login', 'POST', {code:res.code}, null, callback)
+        requestApi('login', 'POST', {code:res.code}, function(res){
+          if(res.data.state==0){
+            wx.setStorageSync("user",res.data.obj)
+            requestApi(obj.action,obj.method,obj.PostData,obj.callback)
+          }
+        })
       }
       else
         console.log(res.errMsg);
@@ -33,15 +38,19 @@ function login(callback) {
   })
 }
 
-function UserChannel(paraData, header, callback) {
-  requestApi('UserChannel', 'GET', paraData, header, callback)
+function UserChannel(paraData, callback) {
+  requestApi('UserChannel', 'GET', paraData, callback)
 }
 
-function Article(paraData,header, callback) {
-  requestApi('Article', 'GET', paraData, header, callback)
+function Article(paraData, callback) {
+  requestApi('Article', 'GET', paraData, callback)
 }
 //调用API 统一方法
-function requestApi(action, method, PostData, header, callback) {
+function requestApi(action, method, PostData, callback) {
+  var user = wx.getStorageSync("user")
+  var header = { sessionid :user.sessionid}
+  var self = this
+  var obj = {action:action,method:method,PostData:PostData,callback:callback}
   wx.request({
     url: _config.serverUrl + 'api/' + action,
     data: PostData,
@@ -49,13 +58,7 @@ function requestApi(action, method, PostData, header, callback) {
     method: method,
     success: function(res) {
       if(res.data.state==1){
-        // login(function(res){
-        //   requestApi(action, method, PostData, header, callback)
-        // })
-        wx.showToast({
-          title: '请登录',
-          duration:2000
-        })
+        login(obj)
       }
       typeof callback == "function" && callback(res)
     },
