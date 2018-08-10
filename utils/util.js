@@ -1,5 +1,5 @@
 var _config = {
-  serverUrl: "https://spapi.hzfanews.com:6016/"
+  serverUrl: "https://spapi.hzfanews.com/"
 }
 
 function formatTime(date) {
