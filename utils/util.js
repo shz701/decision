@@ -1,5 +1,5 @@
 var _config = {
-  serverUrl: "https://spapi.hzfanews.com/"
+  serverUrl: "http://localhost:6016/"
 }
 
 function formatTime(date) {
@@ -64,7 +64,9 @@ function requestApi(action, method, PostData, callback) {
       if(res.data.state==1){
         login(obj)
       }
-      typeof callback == "function" && callback(res)
+      else{
+        typeof callback == "function" && callback(res)
+      }
     },
     fail: function(res) {
       typeof callback == "function" && callback(res)

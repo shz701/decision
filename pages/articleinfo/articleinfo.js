@@ -14,7 +14,7 @@ Page({
       // that.setData({
       //   article: res.data.obj
       // })
-      WxParse.wxParse('article', 'html', res.data.obj.contenttxt, that, 5) 
+      WxParse.wxParse('article', 'html', res.data.obj.content, that, 5) 
     })
   }
 })

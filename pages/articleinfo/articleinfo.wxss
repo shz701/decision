@@ -1,7 +1,14 @@
 /* pages/articleinfo/articleinfo.wxss */
 @import "../../wxParse/wxParse.wxss";
-.container{
-  padding:0 10rpx;
+.wxParse-p{
+  padding:20rpx;
+  display: block;
+  overflow: hidden;
+}
+.wxParse-inline{
+  padding:20rpx;
+  display: block;
+  overflow: hidden;
 }
 .date{
   position: relative;

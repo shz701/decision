@@ -27,10 +27,12 @@ Page({
         })
         
       },
-    })
+    }),
+    this.getUserChannel();
+    this.getArticle(0);
   },
   onShow:function(){
-    this.getUserChannel();
+    
   },
   scrollup:function(e) {
     var self = this;
@@ -44,7 +46,6 @@ Page({
         that.setData({
           selData: res.data.obj
         })
-        that.getArticle(0);
       }
     })
   },
